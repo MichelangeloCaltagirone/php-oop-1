@@ -1,5 +1,22 @@
 <?php 
 require_once __DIR__ . "/classes/Movie.php";
+
+$padrino = new Movie('Il Padrino', 1972, 'Francis Ford Coppola', ['Mafia', 'Azione', 'Giallo']);
+$bladeRunner = new Movie('Blade Runner', 1982, 'Ridley Scott', ["Fantascienza", "Noir","Thriller"]);
+$sevenSeal = new Movie('Il Settimo Sigillo', 1957, 'Ingmar Bergman', ["Classico", "Psicologico", "Thriller"]);
+$spaceOdyssey = new Movie('2001: A Space Odyssey', 1968, 'Stanley Kubrick', ["Fantascienza", "Thriller", "Psicologico"]);
+
+$movieList = [
+    $padrino,
+    $bladeRunner,
+    $sevenSeal,
+    $spaceOdyssey
+];
+
+var_dump($padrino-> describeSelf());
+var_dump($bladeRunner-> describeSelf());
+var_dump($sevenSeal-> describeSelf());
+var_dump($spaceOdyssey-> describeSelf());
 ?>
 
 <!DOCTYPE html>
@@ -13,19 +30,33 @@ require_once __DIR__ . "/classes/Movie.php";
 
 </head>
 <body>
-<?php 
 
-$padrino = new Movie('Il Padrino', 1972, 'Francis Ford Coppola', ['Mafia', 'Azione', 'Giallo']);
-$bladeRunner = new Movie('Blade Runner', 1982, 'Ridley Scott', ["Fantascienza", "Noir","Thriller"]);
-$sevenSeal = new Movie('Il Settimo Sigillo', 1957, 'Ingmar Bergman', ["Classico", "Psicologico", "Thriller"]);
-$spaceOdyssey = new Movie('2001: A Space Odyssey', 1968, 'Stanley Kubrick', ["Fantascienza", "Thriller", "Psicologico"]);
+    <div class="container d-flex flex-wrap row-cols-2">
 
-var_dump($padrino-> describeSelf());
-var_dump($bladeRunner-> describeSelf());
-var_dump($sevenSeal-> describeSelf());
-var_dump($spaceOdyssey-> describeSelf());
+        <?php foreach($movieList as $movie) { ?>
 
-?>
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="card-title"><?= $movie->name ?></h5>
+
+                    <span>Generi: </span>
+                    <?php foreach($movie->genres as $singleGenre) { ?>
+                        <span class="card-subtitle mb-2 text-muted"><?= $singleGenre ?></span>
+                    <?php } ?>
+
+                    <p class="card-text">
+                       Regista: <?= $movie->director?> <br> Anno di uscita: <?= $movie->year ?>
+                    </p>
+
+                </div>
+            </div>
+
+        <?php } ?>
+
+
+    </div>
+
     
 </body>
 </html>
